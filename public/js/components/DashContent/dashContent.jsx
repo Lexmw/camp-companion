@@ -134,6 +134,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(
   GoogleApiWrapper({
-    apiKey: 'AIzaSyDEESDHH5eK0sWqC_atTCk00YawfDJX9iQ',
+    apiKey: process.env.MAPS_API_KEY,
   })(DashMain),
 );
