@@ -64,3 +64,4 @@ typings/
 *.tsbuildinfo
 
 .DS_Store
+.cache

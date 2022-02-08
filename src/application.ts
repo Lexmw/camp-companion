@@ -1,7 +1,7 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
-import {Request, Response, RestApplication} from '@loopback/rest';
+import {RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
@@ -16,6 +16,7 @@ import {
   MyUserService
 } from '@loopback/authentication-jwt';
 import  { MongodbDatasourceDataSource }  from './datasources';
+import { exampleMiddleware } from './middleware/router.middleware';
 
 
 export {ApplicationConfig};
@@ -29,8 +30,12 @@ export class CampCompanionApplication extends BootMixin(
     // Set up the custom sequence
     this.sequence(MySequence);
 
+    this.middleware(exampleMiddleware);
+
     // Set up default home page
     this.static('/', path.join(__dirname, '../dist'));
+    this.static('/dashboard', path.join(__dirname, '../dist'));
+    this.static('/signup', path.join(__dirname, '../dist'));
 
     // Customize @loopback/rest-explorer configuration here
     this.configure(RestExplorerBindings.COMPONENT).to({
